@@ -1,15 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
+import { showInput } from "../actions";
+import { useDispatch } from "react-redux";
 
-class AddButton extends Component {
-    constructor(props) {
-        super(props);
-    }
+function AddButton() {
+    const dispatch = useDispatch();
 
-    addNewTaskInput() {}
-
-    render() {
-        return <button onClick={this.addNewTaskInput}>Add Task</button>;
-    }
+    return <button onClick={() => dispatch(showInput())}>Add Task</button>;
 }
 
 export default AddButton;

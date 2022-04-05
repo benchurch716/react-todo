@@ -9,7 +9,7 @@ function App() {
     return (
         <div id="content">
             <AddButton />
-            <div>{`${showInput}`}</div>
+            {showInput ? <div>{`${showInput}`}</div> : ""}
         </div>
     );
 }
