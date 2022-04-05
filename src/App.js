@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import AddButton from "./components/AddButton";
+import NewTask from "./components/NewTask";
 import { useSelector } from "react-redux";
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
     return (
         <div id="content">
             <AddButton />
-            {showInput ? <div>{`${showInput}`}</div> : ""}
+            {showInput ? <NewTask /> : ""}
         </div>
     );
 }
