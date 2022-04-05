@@ -1,19 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import "./App.css";
 import AddButton from "./components/AddButton";
+import { useSelector } from "react-redux";
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-    }
+function App() {
+    const showInput = useSelector(state => state.showInput);
 
-    render() {
-        return (
-            <div id="content">
-                <AddButton />
-            </div>
-        );
-    }
+    return (
+        <div id="content">
+            <AddButton />
+            <div>{`${showInput}`}</div>
+        </div>
+    );
 }
 
 export default App;

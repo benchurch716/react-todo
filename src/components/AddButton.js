@@ -5,6 +5,8 @@ class AddButton extends Component {
         super(props);
     }
 
+    addNewTaskInput() {}
+
     render() {
         return <button onClick={this.addNewTaskInput}>Add Task</button>;
     }
