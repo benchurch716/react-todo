@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import AddButton from "./components/AddButton";
 
 class App extends Component {
     constructor(props) {
@@ -7,7 +8,11 @@ class App extends Component {
     }
 
     render() {
-        return <div>Setup</div>;
+        return (
+            <div id="content">
+                <AddButton />
+            </div>
+        );
     }
 }
 
