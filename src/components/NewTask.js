@@ -33,7 +33,7 @@ function NewTask() {
                     <form onSubmit={handleSubmit}>
                         <label>
                             Task Name
-                            <Field name="task-name" component={renderInput} validate={requiredText} />
+                            <Field name="taskName" component={renderInput} validate={requiredText} />
                         </label>
                         Task
                         <label>
@@ -52,7 +52,7 @@ function NewTask() {
                         </label>
                         <label>
                             Due Date
-                            <Field name="due-date">
+                            <Field name="dueDate">
                                 {props => (
                                     <div>
                                         <MyDatePicker
