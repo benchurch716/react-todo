@@ -7,9 +7,3 @@ export const addTask = task => {
         payload: task,
     };
 };
-export const newTask = task => {
-    return {
-        type: "NEW_TASK",
-        payload: task,
-    };
-};

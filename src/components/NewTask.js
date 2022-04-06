@@ -5,20 +5,13 @@ import { Form, Field, useFormState } from "react-final-form";
 import Input from "./Input";
 import MyDatePicker from "./MyDatePicker";
 import PriorityPicker from "./PriorityPicker";
-import FormStateToRedux from "./FormStateToRedux";
-import FormStateFromRedux from "./FormStateFromRedux";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask, newTask } from "../actions";
-import { getFormState } from "./finalFormDuck";
+import { addTask } from "../actions";
 
 const renderInput = ({ input, meta }) => (
     <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
 );
 
-// const onSubmit = values => {
-//     const dispatch = useDispatch();
-//     return dispatch(newTask());
-// };
 const requiredText = v => {
     if (!v || v === "") {
         return "Please give your task a name";
@@ -33,12 +26,11 @@ function NewTask() {
         <Form
             onSubmit={values => {
                 console.log(values);
-                return dispatch(newTask(values));
+                return dispatch(addTask(values));
             }}
             render={({ handleSubmit }) => (
                 <div id="new-task-container">
                     <form onSubmit={handleSubmit}>
-                        <FormStateToRedux form="new-task" />
                         <label>
                             Task Name
                             <Field name="task-name" component={renderInput} validate={requiredText} />
