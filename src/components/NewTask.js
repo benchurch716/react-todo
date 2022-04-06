@@ -24,10 +24,7 @@ function NewTask() {
     const dispatch = useDispatch();
     return (
         <Form
-            onSubmit={values => {
-                console.log(values);
-                return dispatch(addTask(values));
-            }}
+            onSubmit={values => dispatch(addTask(values))}
             render={({ handleSubmit }) => (
                 <div id="new-task-container">
                     <form onSubmit={handleSubmit}>
