@@ -1,18 +1,24 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
+import { Form, Field, useFormState } from "react-final-form";
 import Input from "./Input";
 import MyDatePicker from "./MyDatePicker";
-import { Form, Field } from "react-final-form";
 import PriorityPicker from "./PriorityPicker";
+import FormStateToRedux from "./FormStateToRedux";
+import FormStateFromRedux from "./FormStateFromRedux";
+import { useDispatch, useSelector } from "react-redux";
+import { addTask, newTask } from "../actions";
+import { getFormState } from "./finalFormDuck";
 
 const renderInput = ({ input, meta }) => (
     <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
 );
 
-const onSubmit = values => {
-    console.log(JSON.stringify(values));
-};
-
+// const onSubmit = values => {
+//     const dispatch = useDispatch();
+//     return dispatch(newTask());
+// };
 const requiredText = v => {
     if (!v || v === "") {
         return "Please give your task a name";
@@ -22,12 +28,17 @@ const requiredText = v => {
 };
 
 function NewTask() {
+    const dispatch = useDispatch();
     return (
         <Form
-            onSubmit={onSubmit}
+            onSubmit={values => {
+                console.log(values);
+                return dispatch(newTask(values));
+            }}
             render={({ handleSubmit }) => (
                 <div id="new-task-container">
                     <form onSubmit={handleSubmit}>
+                        <FormStateToRedux form="new-task" />
                         <label>
                             Task Name
                             <Field name="task-name" component={renderInput} validate={requiredText} />
