@@ -1,6 +1,9 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Input from "./Input";
+import MyDatePicker from "./MyDatePicker";
 import { Form, Field } from "react-final-form";
+import PriorityPicker from "./PriorityPicker";
 
 const renderInput = ({ input, meta }) => (
     <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
@@ -10,9 +13,9 @@ const onSubmit = values => {
     console.log(JSON.stringify(values));
 };
 
-const required = v => {
+const requiredText = v => {
     if (!v || v === "") {
-        return "This field is required";
+        return "Please give your task a name";
     }
 
     return undefined;
@@ -25,7 +28,39 @@ function NewTask() {
             render={({ handleSubmit }) => (
                 <div id="new-task-container">
                     <form onSubmit={handleSubmit}>
-                        <Field name="task-name" component={renderInput} validate={required} />
+                        <label>
+                            Task Name
+                            <Field name="task-name" component={renderInput} validate={requiredText} />
+                        </label>
+                        Task
+                        <label>
+                            Priority
+                            <Field initialValue="low" name="priority">
+                                {props => (
+                                    <div>
+                                        <PriorityPicker
+                                            name={props.input.name}
+                                            value={props.input.value}
+                                            onChange={props.input.onChange}
+                                        />
+                                    </div>
+                                )}
+                            </Field>
+                        </label>
+                        <label>
+                            Due Date
+                            <Field name="due-date">
+                                {props => (
+                                    <div>
+                                        <MyDatePicker
+                                            name={props.input.name}
+                                            value={props.input.value}
+                                            onChange={props.input.onChange}
+                                        />
+                                    </div>
+                                )}
+                            </Field>
+                        </label>
                         <button type="submit">Submit</button>
                     </form>
                 </div>
