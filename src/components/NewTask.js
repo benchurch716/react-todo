@@ -6,7 +6,7 @@ import Input from "./Input";
 import MyDatePicker from "./MyDatePicker";
 import PriorityPicker from "./PriorityPicker";
 import { useDispatch, useSelector } from "react-redux";
-import { addTask } from "../actions";
+import { addTask, showInput } from "../actions";
 
 const renderInput = ({ input, meta }) => (
     <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
@@ -24,7 +24,10 @@ function NewTask() {
     const dispatch = useDispatch();
     return (
         <Form
-            onSubmit={values => dispatch(addTask(values))}
+            onSubmit={values => {
+                dispatch(addTask(values));
+                dispatch(showInput());
+            }}
             render={({ handleSubmit }) => (
                 <div id="new-task-container">
                     <form onSubmit={handleSubmit}>
