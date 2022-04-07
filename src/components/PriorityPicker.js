@@ -1,12 +1,12 @@
 import React from "react";
-
+import { Form } from "react-bootstrap";
 function PriorityPicker(props) {
     return (
-        <select {...props}>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-        </select>
+        <Form.Select {...props}>
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+        </Form.Select>
     );
 }
 

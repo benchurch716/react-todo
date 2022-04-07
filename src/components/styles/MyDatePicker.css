@@ -1,0 +1,8 @@
+.react-date-picker.react-date-picker--closed.react-date-picker--enabled {
+    height: 38px;
+}
+
+.react-date-picker__wrapper {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}

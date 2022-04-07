@@ -1,12 +1,14 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from "react";
-import { Form, Field, useFormState } from "react-final-form";
+import { Form, Field } from "react-final-form";
+import BSForm from "react-bootstrap/Form";
 import Input from "./Input";
 import MyDatePicker from "./MyDatePicker";
 import PriorityPicker from "./PriorityPicker";
-import { useDispatch, useSelector } from "react-redux";
+import Button from "react-bootstrap/Button";
+import { useDispatch } from "react-redux";
 import { addTask, showInput } from "../actions";
+import { Col, Container, Row } from "react-bootstrap";
 
 const renderInput = ({ input, meta }) => (
     <Input {...input} type="text" errorMessage={meta.touched && meta.error} />
@@ -29,44 +31,51 @@ function NewTask() {
                 dispatch(showInput());
             }}
             render={({ handleSubmit }) => (
-                <div id="new-task-container">
+                <Container id="new-task-container">
                     <form onSubmit={handleSubmit}>
-                        <label>
-                            Task Name
-                            <Field name="taskName" component={renderInput} validate={requiredText} />
-                        </label>
-                        Task
-                        <label>
-                            Priority
-                            <Field initialValue="low" name="priority">
-                                {props => (
-                                    <div>
-                                        <PriorityPicker
-                                            name={props.input.name}
-                                            value={props.input.value}
-                                            onChange={props.input.onChange}
-                                        />
-                                    </div>
-                                )}
-                            </Field>
-                        </label>
-                        <label>
-                            Due Date
-                            <Field name="dueDate">
-                                {props => (
-                                    <div>
-                                        <MyDatePicker
-                                            name={props.input.name}
-                                            value={props.input.value}
-                                            onChange={props.input.onChange}
-                                        />
-                                    </div>
-                                )}
-                            </Field>
-                        </label>
-                        <button type="submit">Submit</button>
+                        <Row>
+                            <Col>
+                                <BSForm.Label>Task Name</BSForm.Label>
+                                <Field name="taskName" component={renderInput} validate={requiredText} />
+                            </Col>
+                            <Col>
+                                <BSForm.Label>Priority</BSForm.Label>
+                                <Field initialValue="Low" name="priority">
+                                    {props => (
+                                        <div>
+                                            <PriorityPicker
+                                                name={props.input.name}
+                                                value={props.input.value}
+                                                onChange={props.input.onChange}
+                                            />
+                                        </div>
+                                    )}
+                                </Field>
+                            </Col>
+                            <Col>
+                                <BSForm.Label>Due Date</BSForm.Label>
+                                <Field name="dueDate">
+                                    {props => (
+                                        <div>
+                                            <MyDatePicker
+                                                name={props.input.name}
+                                                value={props.input.value}
+                                                onChange={props.input.onChange}
+                                            />
+                                        </div>
+                                    )}
+                                </Field>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <Button variant="success" type="submit">
+                                    Submit
+                                </Button>
+                            </Col>
+                        </Row>
                     </form>
-                </div>
+                </Container>
             )}
         />
     );
