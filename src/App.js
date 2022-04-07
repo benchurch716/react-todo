@@ -7,6 +7,7 @@ import Task from "./components/Task";
 import TaskHeader from "./components/TaskHeader";
 import { useSelector } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 function App() {
     const showInput = useSelector(state => state.showInput);
@@ -17,17 +18,9 @@ function App() {
 
     tasks.forEach((task, index) => {
         if (task.complete) {
-            completeTasks.push(
-                <Row key={index}>
-                    <Task key={index} complete="true" taskNo={index} {...task} />
-                </Row>
-            );
+            completeTasks.push(<Task complete="true" taskNo={index} {...task} />);
         } else {
-            incompleteTasks.push(
-                <Row key={index}>
-                    <Task key={index} complete="false" taskNo={index} {...task} />
-                </Row>
-            );
+            incompleteTasks.push(<Task complete="false" taskNo={index} {...task} />);
         }
     });
 
@@ -40,8 +33,36 @@ function App() {
             </Row>
             <Row>{showInput ? <NewTask /> : ""}</Row>
             <Row>{tasks.length > 0 ? <TaskHeader /> : ""}</Row>
-            {incompleteTasks}
-            {completeTasks}
+            <DragDropContext onDragEnd={() => {}}>
+                <Droppable droppableId="incomplete">
+                    {provided => {
+                        return (
+                            <div className="incomplete" {...provided.droppableProps} ref={provided.innerRef}>
+                                {incompleteTasks.map((task, index) => {
+                                    return (
+                                        <Draggable
+                                            key={`key-${index}`}
+                                            draggableId={`id-${index}`}
+                                            index={index}
+                                        >
+                                            {provided => (
+                                                <div
+                                                    ref={provided.innerRef}
+                                                    {...provided.draggableProps}
+                                                    {...provided.dragHandleProps}
+                                                >
+                                                    <Row>{task}</Row>
+                                                </div>
+                                            )}
+                                        </Draggable>
+                                    );
+                                })}
+                                {provided.placeholder}
+                            </div>
+                        );
+                    }}
+                </Droppable>
+            </DragDropContext>
         </Container>
     );
 }
