@@ -6,7 +6,6 @@ import DeleteButton from "./DeleteButton";
 import CompleteButton from "./CompleteButton";
 
 function Task(props) {
-    console.log(props);
     return (
         <Container id={`task-${props.taskNo}`} data-task={props.taskNo} className="task-container ">
             <Alert
