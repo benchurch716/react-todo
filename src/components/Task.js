@@ -3,19 +3,23 @@ import { format } from "date-fns";
 import React from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
 import DeleteButton from "./DeleteButton";
+import CompleteButton from "./CompleteButton";
 
 function Task(props) {
+    console.log(props);
     return (
         <Container id={`task-${props.taskNo}`} data-task={props.taskNo} className="task-container ">
             <Alert
                 variant={
-                    props.priority == "Low"
+                    props.complete == true
+                        ? "secondary"
+                        : props.priority == "Low"
                         ? "success"
                         : props.priority == "Medium"
                         ? "warning"
                         : props.priority == "High"
                         ? "danger"
-                        : "secondary"
+                        : "dark"
                 }
             >
                 <Row>
@@ -30,7 +34,12 @@ function Task(props) {
                     </Col>
                     <Col>
                         <Row>
-                            <DeleteButton />
+                            <Col>
+                                <CompleteButton complete={props.complete} />
+                            </Col>
+                            <Col>
+                                <DeleteButton />
+                            </Col>
                         </Row>
                     </Col>
                 </Row>

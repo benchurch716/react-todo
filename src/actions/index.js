@@ -13,3 +13,9 @@ export const deleteTask = e => {
         payload: e,
     };
 };
+export const completeTask = e => {
+    return {
+        type: "COMPLETE_TASK",
+        payload: e,
+    };
+};
