@@ -2,8 +2,7 @@
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
 
-function Task(props) {
-    console.log(props);
+function Task() {
     return (
         <Container className="task-header">
             <Row>

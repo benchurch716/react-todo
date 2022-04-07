@@ -7,3 +7,9 @@ export const addTask = task => {
         payload: task,
     };
 };
+export const deleteTask = e => {
+    return {
+        type: "DELETE_TASK",
+        payload: e,
+    };
+};

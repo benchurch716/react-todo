@@ -2,11 +2,11 @@
 import { format } from "date-fns";
 import React from "react";
 import { Alert, Col, Container, Row } from "react-bootstrap";
+import DeleteButton from "./DeleteButton";
 
 function Task(props) {
-    console.log(props);
     return (
-        <Container className="task-container ">
+        <Container id={`task-${props.taskNo}`} data-task={props.taskNo} className="task-container ">
             <Alert
                 variant={
                     props.priority == "Low"
@@ -27,6 +27,11 @@ function Task(props) {
                     </Col>
                     <Col>
                         <div className="due-date">{format(props.dueDate || new Date(), "M/d/yyyy")}</div>
+                    </Col>
+                    <Col>
+                        <Row>
+                            <DeleteButton />
+                        </Row>
                     </Col>
                 </Row>
             </Alert>

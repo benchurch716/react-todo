@@ -22,7 +22,7 @@ function App() {
             <Row>{tasks.length > 0 ? <TaskHeader /> : ""}</Row>
             {tasks.map((task, index) => (
                 <Row key={index}>
-                    <Task key={index} {...task} />
+                    <Task key={index} taskNo={index} {...task} />
                 </Row>
             ))}
         </Container>
